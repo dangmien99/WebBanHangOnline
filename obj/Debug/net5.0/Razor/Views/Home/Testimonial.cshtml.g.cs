@@ -27,7 +27,7 @@ using WebBanHangOnline.Models;
 #line hidden
 #nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"a32362c615c7fa433e6124c10110c4029b62222d", @"/Views/Home/Testimonial.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"c98fbafbf1b8355f9254bd2268940a0736119727", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"94eae2351e8790c971705f00a24b6b8474140bd8", @"/Views/_ViewImports.cshtml")]
     #nullable restore
     public class Views_Home_Testimonial : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     #nullable disable
