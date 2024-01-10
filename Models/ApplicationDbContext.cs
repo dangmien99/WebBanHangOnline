@@ -17,6 +17,7 @@ namespace WebBanHangOnline.Models
         {
         }
 
+
         public virtual DbSet<ChiTietDonHang> ChiTietDonHangs { get; set; }
         public virtual DbSet<DanhGium> DanhGia { get; set; }
         public virtual DbSet<DanhMucSanPham> DanhMucSanPhams { get; set; }
@@ -28,6 +29,7 @@ namespace WebBanHangOnline.Models
         public virtual DbSet<ThuongHieu> ThuongHieus { get; set; }
         public virtual DbSet<VanChuyen> VanChuyens { get; set; }
 
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -36,6 +38,7 @@ namespace WebBanHangOnline.Models
                 optionsBuilder.UseSqlServer("Data Source=DESKTOP-MV6VII4;Initial Catalog=BANQUANAO;Integrated Security=True;");
             }
         }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
