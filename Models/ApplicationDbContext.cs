@@ -17,7 +17,6 @@ namespace WebBanHangOnline.Models
         {
         }
 
-
         public virtual DbSet<ChiTietDonHang> ChiTietDonHangs { get; set; }
         public virtual DbSet<DanhGium> DanhGia { get; set; }
         public virtual DbSet<DanhMucSanPham> DanhMucSanPhams { get; set; }
@@ -29,16 +28,14 @@ namespace WebBanHangOnline.Models
         public virtual DbSet<ThuongHieu> ThuongHieus { get; set; }
         public virtual DbSet<VanChuyen> VanChuyens { get; set; }
 
-
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Data Source=DESKTOP-MV6VII4;Initial Catalog=BANQUANAO;Integrated Security=True;");
+                optionsBuilder.UseSqlServer("Data Source=THUONG\\HOAITHUONG;Initial Catalog=BANQUANAO;Integrated Security=True");
             }
         }
-
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -51,30 +48,18 @@ namespace WebBanHangOnline.Models
 
                 entity.ToTable("ChiTietDonHang");
 
-                entity.Property(e => e.MaCtdh)
-                    .HasMaxLength(5)
-                    .IsUnicode(false)
-                    .HasColumnName("MaCTDH")
-                    .IsFixedLength(true);
+                entity.Property(e => e.MaCtdh).HasColumnName("MaCTDH");
 
-                entity.Property(e => e.MaDh)
-                    .HasMaxLength(5)
-                    .IsUnicode(false)
-                    .HasColumnName("MaDH")
-                    .IsFixedLength(true);
+                entity.Property(e => e.MaDh).HasColumnName("MaDH");
 
-                entity.Property(e => e.MaSp)
-                    .HasMaxLength(5)
-                    .IsUnicode(false)
-                    .HasColumnName("MaSP")
-                    .IsFixedLength(true);
+                entity.Property(e => e.MaSp).HasColumnName("MaSP");
 
                 entity.Property(e => e.ThanhTien).HasComputedColumnSql("([Sl]*[DonGia])", false);
 
                 entity.HasOne(d => d.MaDhNavigation)
                     .WithMany(p => p.ChiTietDonHangs)
                     .HasForeignKey(d => d.MaDh)
-                    .HasConstraintName("FK__ChiTietDon__MaDH__35BCFE0A");
+                    .HasConstraintName("FK_ChiTietDonHang_DonDatHang");
 
                 entity.HasOne(d => d.MaSpNavigation)
                     .WithMany(p => p.ChiTietDonHangs)
@@ -87,20 +72,11 @@ namespace WebBanHangOnline.Models
                 entity.HasKey(e => e.MaDg)
                     .HasName("PK__DanhGia__272586608A7D0CFD");
 
-                entity.Property(e => e.MaDg)
-                    .HasMaxLength(5)
-                    .IsUnicode(false)
-                    .HasColumnName("MaDG")
-                    .IsFixedLength(true);
+                entity.Property(e => e.MaDg).HasColumnName("MaDG");
 
                 entity.Property(e => e.DanhGia).HasMaxLength(50);
 
-                entity.Property(e => e.MaKh)
-                    .IsRequired()
-                    .HasMaxLength(5)
-                    .IsUnicode(false)
-                    .HasColumnName("MaKH")
-                    .IsFixedLength(true);
+                entity.Property(e => e.MaKh).HasColumnName("MaKH");
 
                 entity.Property(e => e.NgayDanhGia).HasColumnType("date");
 
@@ -108,21 +84,16 @@ namespace WebBanHangOnline.Models
                     .WithMany(p => p.DanhGia)
                     .HasForeignKey(d => d.MaKh)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__DanhGia__MaKH__38996AB5");
+                    .HasConstraintName("FK_DanhGia_KhachHang");
             });
 
             modelBuilder.Entity<DanhMucSanPham>(entity =>
             {
-                entity.HasKey(e => e.MaDm)
-                    .HasName("PK__DanhMucS__2725866E0F78C758");
+                entity.HasKey(e => e.MaDm);
 
                 entity.ToTable("DanhMucSanPham");
 
-                entity.Property(e => e.MaDm)
-                    .HasMaxLength(5)
-                    .IsUnicode(false)
-                    .HasColumnName("MaDM")
-                    .IsFixedLength(true);
+                entity.Property(e => e.MaDm).HasColumnName("MaDM");
 
                 entity.Property(e => e.TenDm)
                     .HasMaxLength(50)
@@ -131,34 +102,19 @@ namespace WebBanHangOnline.Models
 
             modelBuilder.Entity<DonDatHang>(entity =>
             {
-                entity.HasKey(e => e.MaDh)
-                    .HasName("PK__DonDatHa__27258661EDCB93B0");
+                entity.HasKey(e => e.MaDh);
 
                 entity.ToTable("DonDatHang");
 
-                entity.Property(e => e.MaDh)
-                    .HasMaxLength(5)
-                    .IsUnicode(false)
-                    .HasColumnName("MaDH")
-                    .IsFixedLength(true);
+                entity.Property(e => e.MaDh).HasColumnName("MaDH");
 
                 entity.Property(e => e.Dcgh)
                     .HasMaxLength(50)
                     .HasColumnName("DCGH");
 
-                entity.Property(e => e.MaKh)
-                    .IsRequired()
-                    .HasMaxLength(5)
-                    .IsUnicode(false)
-                    .HasColumnName("MaKH")
-                    .IsFixedLength(true);
+                entity.Property(e => e.MaKh).HasColumnName("MaKH");
 
-                entity.Property(e => e.MaTt)
-                    .IsRequired()
-                    .HasMaxLength(5)
-                    .IsUnicode(false)
-                    .HasColumnName("MaTT")
-                    .IsFixedLength(true);
+                entity.Property(e => e.MaTt).HasColumnName("MaTT");
 
                 entity.Property(e => e.NgayDh)
                     .HasColumnType("date")
@@ -172,27 +128,22 @@ namespace WebBanHangOnline.Models
                     .WithMany(p => p.DonDatHangs)
                     .HasForeignKey(d => d.MaKh)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__DonDatHang__MaKH__31EC6D26");
+                    .HasConstraintName("FK_DonDatHang_KhachHang");
 
                 entity.HasOne(d => d.MaTtNavigation)
                     .WithMany(p => p.DonDatHangs)
                     .HasForeignKey(d => d.MaTt)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__DonDatHang__MaTT__32E0915F");
+                    .HasConstraintName("FK_DonDatHang_ThanhToan");
             });
 
             modelBuilder.Entity<KhachHang>(entity =>
             {
-                entity.HasKey(e => e.MaKh)
-                    .HasName("PK__KhachHan__2725CF1E3FFB1AFD");
+                entity.HasKey(e => e.MaKh);
 
                 entity.ToTable("KhachHang");
 
-                entity.Property(e => e.MaKh)
-                    .HasMaxLength(5)
-                    .IsUnicode(false)
-                    .HasColumnName("MaKH")
-                    .IsFixedLength(true);
+                entity.Property(e => e.MaKh).HasColumnName("MaKH");
 
                 entity.Property(e => e.Dc)
                     .HasMaxLength(50)
@@ -212,32 +163,17 @@ namespace WebBanHangOnline.Models
 
             modelBuilder.Entity<SanPham>(entity =>
             {
-                entity.HasKey(e => e.MaSp)
-                    .HasName("PK__SanPham__2725081CA1CAB706");
+                entity.HasKey(e => e.MaSp);
 
                 entity.ToTable("SanPham");
 
-                entity.Property(e => e.MaSp)
-                    .HasMaxLength(5)
-                    .IsUnicode(false)
-                    .HasColumnName("MaSP")
-                    .IsFixedLength(true);
+                entity.Property(e => e.MaSp).HasColumnName("MaSP");
 
                 entity.Property(e => e.Anh).HasMaxLength(50);
 
-                entity.Property(e => e.MaDm)
-                    .IsRequired()
-                    .HasMaxLength(5)
-                    .IsUnicode(false)
-                    .HasColumnName("MaDM")
-                    .IsFixedLength(true);
+                entity.Property(e => e.MaDm).HasColumnName("MaDM");
 
-                entity.Property(e => e.MaTh)
-                    .IsRequired()
-                    .HasMaxLength(5)
-                    .IsUnicode(false)
-                    .HasColumnName("MaTH")
-                    .IsFixedLength(true);
+                entity.Property(e => e.MaTh).HasColumnName("MaTH");
 
                 entity.Property(e => e.TenSp)
                     .HasMaxLength(50)
@@ -247,13 +183,13 @@ namespace WebBanHangOnline.Models
                     .WithMany(p => p.SanPhams)
                     .HasForeignKey(d => d.MaDm)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__SanPham__MaDM__2D27B809");
+                    .HasConstraintName("FK_SanPham_DanhMucSanPham");
 
                 entity.HasOne(d => d.MaThNavigation)
                     .WithMany(p => p.SanPhams)
                     .HasForeignKey(d => d.MaTh)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__SanPham__MaTH__2C3393D0");
+                    .HasConstraintName("FK_SanPham_ThuongHieu");
             });
 
             modelBuilder.Entity<TaiKhoan>(entity =>
@@ -262,11 +198,6 @@ namespace WebBanHangOnline.Models
                     .HasName("PK__TaiKhoan__2725D7045924B4E5");
 
                 entity.ToTable("TaiKhoan");
-
-                entity.Property(e => e.MaNd)
-                    .HasMaxLength(5)
-                    .IsUnicode(false)
-                    .IsFixedLength(true);
 
                 entity.Property(e => e.MatKhau).HasMaxLength(20);
 
@@ -281,16 +212,11 @@ namespace WebBanHangOnline.Models
 
             modelBuilder.Entity<ThanhToan>(entity =>
             {
-                entity.HasKey(e => e.MaTt)
-                    .HasName("PK__ThanhToa__27250079B2F3627A");
+                entity.HasKey(e => e.MaTt);
 
                 entity.ToTable("ThanhToan");
 
-                entity.Property(e => e.MaTt)
-                    .HasMaxLength(5)
-                    .IsUnicode(false)
-                    .HasColumnName("MaTT")
-                    .IsFixedLength(true);
+                entity.Property(e => e.MaTt).HasColumnName("MaTT");
 
                 entity.Property(e => e.Pttt)
                     .HasMaxLength(50)
@@ -303,16 +229,11 @@ namespace WebBanHangOnline.Models
 
             modelBuilder.Entity<ThuongHieu>(entity =>
             {
-                entity.HasKey(e => e.MaTh)
-                    .HasName("PK__ThuongHi__272500756468DCA6");
+                entity.HasKey(e => e.MaTh);
 
                 entity.ToTable("ThuongHieu");
 
-                entity.Property(e => e.MaTh)
-                    .HasMaxLength(5)
-                    .IsUnicode(false)
-                    .HasColumnName("MaTH")
-                    .IsFixedLength(true);
+                entity.Property(e => e.MaTh).HasColumnName("MaTH");
 
                 entity.Property(e => e.TenTh)
                     .HasMaxLength(50)
@@ -326,18 +247,9 @@ namespace WebBanHangOnline.Models
 
                 entity.ToTable("VanChuyen");
 
-                entity.Property(e => e.MaVc)
-                    .HasMaxLength(5)
-                    .IsUnicode(false)
-                    .HasColumnName("MaVC")
-                    .IsFixedLength(true);
+                entity.Property(e => e.MaVc).HasColumnName("MaVC");
 
-                entity.Property(e => e.MaDh)
-                    .IsRequired()
-                    .HasMaxLength(5)
-                    .IsUnicode(false)
-                    .HasColumnName("MaDH")
-                    .IsFixedLength(true);
+                entity.Property(e => e.MaDh).HasColumnName("MaDH");
 
                 entity.Property(e => e.Sdt)
                     .HasMaxLength(50)
@@ -351,7 +263,7 @@ namespace WebBanHangOnline.Models
                     .WithMany(p => p.VanChuyens)
                     .HasForeignKey(d => d.MaDh)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__VanChuyen__MaDH__3B75D760");
+                    .HasConstraintName("FK_VanChuyen_DonDatHang");
             });
 
             OnModelCreatingPartial(modelBuilder);

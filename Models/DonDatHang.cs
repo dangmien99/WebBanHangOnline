@@ -13,11 +13,11 @@ namespace WebBanHangOnline.Models
             VanChuyens = new HashSet<VanChuyen>();
         }
 
-        public string MaDh { get; set; }
-        public string MaKh { get; set; }
+        public int MaDh { get; set; }
+        public int MaKh { get; set; }
         public DateTime? NgayDh { get; set; }
         public string TrangThaiDh { get; set; }
-        public string MaTt { get; set; }
+        public int MaTt { get; set; }
         public string Dcgh { get; set; }
 
         public virtual KhachHang MaKhNavigation { get; set; }

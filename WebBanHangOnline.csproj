@@ -5,6 +5,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\css\style.css.map" />
+    <None Include="wwwroot\css\style.scss" />
+    <None Include="wwwroot\fonts\fontawesome-webfont.woff2" />
+    <None Include="wwwroot\images\free.svg" />
+    <None Include="wwwroot\images\high-quality.svg" />
+    <None Include="wwwroot\images\truck.svg" />
+    <None Include="wwwroot\js\bootstrap.js" />
+    <None Include="wwwroot\js\custom.js" />
+    <None Include="wwwroot\js\jquery-3.4.1.min.js" />
     <None Include="wwwroot\js\site.js" />
   </ItemGroup>
 

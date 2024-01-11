@@ -12,7 +12,7 @@ namespace WebBanHangOnline.Models
             SanPhams = new HashSet<SanPham>();
         }
 
-        public string MaDm { get; set; }
+        public int MaDm { get; set; }
         public string TenDm { get; set; }
 
         public virtual ICollection<SanPham> SanPhams { get; set; }

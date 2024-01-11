@@ -12,7 +12,7 @@ namespace WebBanHangOnline.Models
             DonDatHangs = new HashSet<DonDatHang>();
         }
 
-        public string MaTt { get; set; }
+        public int MaTt { get; set; }
         public string Pttt { get; set; }
         public string Tttt { get; set; }
 
