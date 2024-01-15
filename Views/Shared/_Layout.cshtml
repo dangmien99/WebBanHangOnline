@@ -6,6 +6,61 @@
     <title>@ViewData["Title"] - WebBanHangOnline</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>A-uthentic</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/prettyPhoto.css" rel="stylesheet">
+    <link href="css/price-range.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
+    <link href="css/responsive.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+    <link rel="shortcut icon" href="images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <style>
+        /* Your CSS styles here */
+        li a {
+            color: black; /* Set the initial color to black */
+            text-decoration: none; /* Remove underline */
+        }
+
+            li a.active {
+                color: orange; /* Change the color to orange when active */
+            }
+    </style>
+
+    <script>
+        $(document).ready(function () {
+            var activeLink = null;
+
+            // Add click event to all navigation links
+            $('li a').click(function () {
+                // Remove 'active' class from the previously active link
+                if (activeLink !== null) {
+                    activeLink.removeClass('active');
+                }
+
+                // Add 'active' class to the clicked link
+                $(this).addClass('active');
+
+                // Update the active link variable
+                activeLink = $(this);
+            });
+        });
+    </script>
 </head>
 <body>
     <header>
@@ -16,9 +71,7 @@
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-
                 <div class="hero_area">
-
                     <header id="header">
                         <!--header-->
                         <div class="header_top">
@@ -34,7 +87,7 @@
                             <!--header-bottom-->
                             <div class="container">
                                 <div class="row">
-                                    <div class="col-sm-9">
+                                    <div class="col-sm-9 container">
                                         <div class="navbar-header">
                                             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                                                 <span class="sr-only">Toggle navigation</span>
@@ -45,22 +98,26 @@
                                         </div>
                                         <div class="mainmenu pull-left">
                                             <ul class="nav navbar-nav collapse navbar-collapse">
-                                                <li><a asp-controller="TrangChu" class="active">Trang Chủ </a></li>
+                                                <div class="logo pull-left">
+                                                    <a href="index.html"><img src="images/img/logo.png" alt="" /></a>
+                                                </div>
+                                                <li><a asp-controller="Home">Trang Chủ </a></li>
                                                 <li><a asp-controller="SanPham">Sản Phẩm  </a></li>
-                                                <li><a asp-controller="THANHTOAN"> TinTức </a></li>
-
-                                                <li><a asp-controller="GIOHANG"><i class="fa fa-shopping-cart"></i></a></li>
+                                                <li><a class=""> Tin Tức </a></li>
+                                                <li><a> Liên Hệ </a></li>
+                                                <li><a asp-controller="GioHang"><i class="fa fa-shopping-cart"></i></a></li>
                                                 <li><a asp-controller="DANGNHAP">Đăng Nhập  </a></li>
-                                                @*<li class="dropdown">
-                                                        <a href="#">Blog<i class="fa fa-angle-down"></i></a>
-                                                        <ul role="menu" class="sub-menu">
-                                                            <li><a href="blog.html">Blog List</a></li>
-                                                            <li><a href="blog-single.html">Blog Single</a></li>
-                                                        </ul>
-                                                    </li>
-                                                    <li><a href="#"><i class="fa fa-user"></i> Account</a></li>
+                                                <li><a asp-area="Admin" asp-controller="Home" asp-action="Index">Trang Admin</a></li>
+                                                <li class="dropdown">
+                                                    <a href="#">Blog<i class="fa fa-angle-down"></i></a>
+                                                    <ul role="menu" class="sub-menu">
+                                                        <li><a href="blog.html">Blog List</a></li>
+                                                        <li><a href="blog-single.html">Blog Single</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li><a href="#"><i class="fa fa-user"></i> Account</a></li>
 
-                                                    <li><a href="login.html"><i class="fa fa-lock"></i> Login</a></li>*@
+                                                <li><a href="login.html"><i class="fa fa-lock"></i> Login</a></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -79,8 +136,6 @@
                             @RenderBody()
                         </main>
                     </div>
-
-
                     <div class="footer-widget">
                         <div class="container">
                             <div class="row">
@@ -94,7 +149,6 @@
                                         </ul>
                                     </div>
                                 </div>
-
                                 <div class="col-sm-2">
                                     <div class="single-widget">
                                         <h2>Policies</h2>
@@ -133,15 +187,7 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="footer-bottom">
-                        <div class="container">
-                            <div class="row">
-                                <p class="pull-left"></p>
-                                <p class="pull-right">Designed by <span><a target="_blank" href="http://www.themeum.com">Themeum</a></span></p>
-                            </div>
-                        </div>
-                    </div>
+                   
                 </div>
             </div>
         </nav>

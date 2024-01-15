@@ -18,11 +18,17 @@ namespace WebBanHangOnline.Controllers
             _logger = logger;
             _dataContext = context;
         }
-
         public IActionResult Index()
         {
             var product = _dataContext.SanPhams.Include("MaDmNavigation").Include("MaThNavigation").ToList();
             return View(product);
+        }
+        public async Task< IActionResult> Details( int slug) // chưa nhận được id
+        {
+            if (slug == null) return RedirectToAction("Index");
+            var sanPhamById = _dataContext.SanPhams.Where(p => p.MaSp == slug).FirstOrDefault();
+            return View(sanPhamById);
+
         }
     }
 }

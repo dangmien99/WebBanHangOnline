@@ -18,10 +18,13 @@ namespace WebBanHangOnline.Models
         }
 
         public virtual DbSet<ChiTietDonHang> ChiTietDonHangs { get; set; }
-        public virtual DbSet<DanhGium> DanhGia { get; set; }
+        public virtual DbSet<DanhGiaKh> DanhGiaKhs { get; set; }
         public virtual DbSet<DanhMucSanPham> DanhMucSanPhams { get; set; }
         public virtual DbSet<DonDatHang> DonDatHangs { get; set; }
+        public virtual DbSet<GioHang> GioHangs { get; set; }
         public virtual DbSet<KhachHang> KhachHangs { get; set; }
+        public virtual DbSet<NhanVien> NhanViens { get; set; }
+        public virtual DbSet<PhanQuyen> PhanQuyens { get; set; }
         public virtual DbSet<SanPham> SanPhams { get; set; }
         public virtual DbSet<TaiKhoan> TaiKhoans { get; set; }
         public virtual DbSet<ThanhToan> ThanhToans { get; set; }
@@ -67,21 +70,23 @@ namespace WebBanHangOnline.Models
                     .HasConstraintName("FK_ChiTietDonHang_SanPham");
             });
 
-            modelBuilder.Entity<DanhGium>(entity =>
+            modelBuilder.Entity<DanhGiaKh>(entity =>
             {
                 entity.HasKey(e => e.MaDg)
                     .HasName("PK__DanhGia__272586608A7D0CFD");
 
-                entity.Property(e => e.MaDg).HasColumnName("MaDG");
+                entity.ToTable("DanhGiaKH");
 
-                entity.Property(e => e.DanhGia).HasMaxLength(50);
+                entity.Property(e => e.MaDg).HasColumnName("MaDG");
 
                 entity.Property(e => e.MaKh).HasColumnName("MaKH");
 
                 entity.Property(e => e.NgayDanhGia).HasColumnType("date");
 
+                entity.Property(e => e.NoiDung).HasMaxLength(50);
+
                 entity.HasOne(d => d.MaKhNavigation)
-                    .WithMany(p => p.DanhGia)
+                    .WithMany(p => p.DanhGiaKhs)
                     .HasForeignKey(d => d.MaKh)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_DanhGia_KhachHang");
@@ -93,11 +98,7 @@ namespace WebBanHangOnline.Models
 
                 entity.ToTable("DanhMucSanPham");
 
-                entity.Property(e => e.MaDm).HasColumnName("MaDM");
-
-                entity.Property(e => e.TenDm)
-                    .HasMaxLength(50)
-                    .HasColumnName("TenDM");
+                entity.Property(e => e.TenDm).HasMaxLength(50);
             });
 
             modelBuilder.Entity<DonDatHang>(entity =>
@@ -137,6 +138,19 @@ namespace WebBanHangOnline.Models
                     .HasConstraintName("FK_DonDatHang_ThanhToan");
             });
 
+            modelBuilder.Entity<GioHang>(entity =>
+            {
+                entity.HasKey(e => e.MaGio);
+
+                entity.ToTable("GioHang");
+
+                entity.Property(e => e.Anh).HasMaxLength(50);
+
+                entity.Property(e => e.MaKh).HasColumnName("MaKH");
+
+                entity.Property(e => e.NgayThem).HasColumnType("date");
+            });
+
             modelBuilder.Entity<KhachHang>(entity =>
             {
                 entity.HasKey(e => e.MaKh);
@@ -151,6 +165,8 @@ namespace WebBanHangOnline.Models
 
                 entity.Property(e => e.Email).HasMaxLength(30);
 
+                entity.Property(e => e.MaPq).HasColumnName("MaPQ");
+
                 entity.Property(e => e.Sdt)
                     .HasMaxLength(10)
                     .HasColumnName("SDT")
@@ -161,23 +177,49 @@ namespace WebBanHangOnline.Models
                     .HasColumnName("TenKH");
             });
 
+            modelBuilder.Entity<NhanVien>(entity =>
+            {
+                entity.HasKey(e => e.MaNv);
+
+                entity.ToTable("NhanVien");
+
+                entity.Property(e => e.MaNv).HasColumnName("MaNV");
+
+                entity.Property(e => e.DiaChi).HasMaxLength(50);
+
+                entity.Property(e => e.HoTen).HasMaxLength(50);
+
+                entity.Property(e => e.MaPq).HasColumnName("MaPQ");
+
+                entity.Property(e => e.NgaySinh).HasColumnType("date");
+
+                entity.Property(e => e.Sdt)
+                    .HasMaxLength(50)
+                    .HasColumnName("SDT");
+            });
+
+            modelBuilder.Entity<PhanQuyen>(entity =>
+            {
+                entity.HasKey(e => e.MaPq);
+
+                entity.ToTable("PhanQuyen");
+
+                entity.Property(e => e.MaPq).HasColumnName("MaPQ");
+
+                entity.Property(e => e.TenPq)
+                    .HasMaxLength(50)
+                    .HasColumnName("TenPQ");
+            });
+
             modelBuilder.Entity<SanPham>(entity =>
             {
                 entity.HasKey(e => e.MaSp);
 
                 entity.ToTable("SanPham");
 
-                entity.Property(e => e.MaSp).HasColumnName("MaSP");
-
                 entity.Property(e => e.Anh).HasMaxLength(50);
 
-                entity.Property(e => e.MaDm).HasColumnName("MaDM");
-
-                entity.Property(e => e.MaTh).HasColumnName("MaTH");
-
-                entity.Property(e => e.TenSp)
-                    .HasMaxLength(50)
-                    .HasColumnName("TenSP");
+                entity.Property(e => e.TenSp).HasMaxLength(50);
 
                 entity.HasOne(d => d.MaDmNavigation)
                     .WithMany(p => p.SanPhams)
@@ -233,11 +275,7 @@ namespace WebBanHangOnline.Models
 
                 entity.ToTable("ThuongHieu");
 
-                entity.Property(e => e.MaTh).HasColumnName("MaTH");
-
-                entity.Property(e => e.TenTh)
-                    .HasMaxLength(50)
-                    .HasColumnName("TenTH");
+                entity.Property(e => e.TenTh).HasMaxLength(50);
             });
 
             modelBuilder.Entity<VanChuyen>(entity =>

@@ -1,0 +1,14 @@
+﻿@*@if (KhachHang == null)
+{
+
+    <a href="@Url.Action( "Index", "DangNhap")" class="my-auto">
+        <i class="fas fa-user fa-2x"></i>
+    </a>
+}
+else
+{
+    <a href="@Url.Action( "Index", "TaiKhoan")" class="my-auto">
+        <i class="fas fa-user fa-2x me-2"></i>
+        @KhachHang.TenKh
+    </a>*@
+}

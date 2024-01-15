@@ -20,33 +20,22 @@ namespace WebBanHangOnline.Controllers
             _logger = logger;
             _dataContext = context;
         }
-
         public IActionResult Index()
         {
-            var product = _dataContext.SanPhams.Include("MaDmNavigation").Include("MaThNavigation").ToList();
-            return View(product);
+            var products = _dataContext.SanPhams.Include("MaDmNavigation").Include("MaThNavigation").Take(6).ToList();
+            return View(products);
         }
+//public AcceptedResult Home()
+//        {
+//            ApplicationDbContext context = new ApplicationDbContext();
+//            var data = context.TaiKhoans;
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-        public IActionResult Shop()
-        {
-            return View();
-        }
-        public IActionResult Testimonial()
-        {
-            return View();
-        }
-        public IActionResult Why()
-        {
-            return View();
-        }
-        public IActionResult Contact()
-        {
-            return View();
-        }
+//            var data2 = ApplicationDbContext.TaiKhoan1;
+//            return View();
+//        }
+      
+       
+     
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

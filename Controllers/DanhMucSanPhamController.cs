@@ -15,12 +15,12 @@ namespace WebBanHangOnline.Controllers
         {
             _dataContext = context;
         }
-        public async Task<IActionResult> Index(int code)
+        public async Task<IActionResult> Index(int slug)
         {
-            var danhMucSanPham = _dataContext.DanhMucSanPhams.Where(c => c.MaDm == code).FirstOrDefault();
+            var danhMucSanPham = _dataContext.DanhMucSanPhams.Where(c => c.MaDm == slug).FirstOrDefault();//lấy dữ liệu 
             if (danhMucSanPham == null) return RedirectToAction("Index");
-            var SanPhamByDanhMucSan = _dataContext.SanPhams.Where(p => p.MaDm == danhMucSanPham.MaDm);
-            return View(await SanPhamByDanhMucSan.OrderByDescending(p => p.MaDm).ToListAsync());
+            var sanPhamByDanhMucSan = _dataContext.SanPhams.Where(p => p.MaDm == danhMucSanPham.MaDm);
+            return View(await sanPhamByDanhMucSan.OrderByDescending(p => p.MaDm).ToListAsync());
         }
     }
 }

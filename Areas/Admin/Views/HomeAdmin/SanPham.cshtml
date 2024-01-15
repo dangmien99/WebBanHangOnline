@@ -1,0 +1,109 @@
+﻿@model X.PagedList.IPagedList<SanPham>
+@using X.PagedList.Mvc.Core
+
+@{
+    ViewData["Title"] = "SanPham";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Quản lý sản phẩm</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+               Tên sản phẩm
+            </th>
+            <th>
+                giá thành
+            </th>
+            <th>
+               Ảnh
+            </th>
+            <th>
+                Số lượng
+            </th>
+            <th>
+                Mã danh mục
+            </th>
+            <th>
+                Mã thương hiệu
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenSp)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GiaThanh)
+            </td>
+            <td>
+                <img src="~/layoutAdmin/assets/images/@item.Anh" alt="Product Image" style="max-width: 100px; max-height: 100px;" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SoLuong)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaDmNavigation.TenDm)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaThNavigation.TenTh)
+            </td>
+            <td>
+                <button asp-action="Edit" asp-route-id="@item.MaSp">
+                    <i class="fa fa-edit"></i>
+                </button> |
+                <button asp-action="Details" asp-route-id="@item.MaSp">
+                    <i class="fa fa-info"></i> 
+                </button> |
+                <button asp-action="Delete" asp-route-id="@item.MaSp">
+                    <i class="fa fa-trash"></i> 
+                </button>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+<div class="pagination">
+    @Html.PagedListPager(Model, page => Url.Action("SanPham", new { page = page }))
+</div>
+<style>
+    .table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+        .table th, .table td {
+            border: 1px solid #ddd;
+            padding: 8px; /* Để tạo khoảng trống giữa nội dung và đường kẻ */
+            text-align: left; /* Căn trái cho văn bản */
+        }
+
+        .table thead th {
+            border-top: 1px solid #ddd; /* Đường kẻ trên ô tiêu đề */
+            border-bottom: 1px solid #ddd; /* Đường kẻ dưới ô tiêu đề */
+        }
+        .table thead tr {
+            border-bottom: 2px solid #ddd; /* Đường kẻ dưới ô tiêu đề */
+        }
+
+        .table tbody tr:first-child {
+            border-top: 1px solid #ddd; /* Không có đường kẻ trên dòng đầu tiên */
+        }
+
+        .table tbody tr {
+            border-bottom: 1px solid #ddd; /* Màu và độ dày của đường kẻ */
+        }
+
+            .table tbody tr:last-child {
+                border-bottom: none; /* Không có đường kẻ ở dòng cuối cùng */
+            }
+</style>

@@ -1,0 +1,11 @@
+﻿@model IEnumerable<TaiKhoan>
+
+
+@foreach (var item in Model)
+{
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title"><a asp-action="Index" asp-controller="DangNhap" asp-route-slug="@item.TaiKhoan1">@item.MatKhau</a></h4>
+        </div>
+    </div>
+}
